@@ -1,0 +1,41 @@
+<html>
+<body>
+       <form enctype ="multipart/form-data" method="post">
+           {% csrf_token %}
+           {{ form.as_p }}
+           <button type = "submit" class = "save btn btn−default"> Save </button>
+       </form>
+<br />
+<table border ='1' width ="350">
+    <tr>
+    <td bgcolor="#dddddd"> <b> Name </b> </td> 
+    <td bgcolor="#dddddd"> <b> Email </b> </td> 
+    <td bgcolor="#dddddd"> <b> Section </b> </td> 
+     <td bgcolor="#dddddd"> <b> photo </b> </td> 
+    </tr>
+{% for stud in dataOject %}
+    <tr>
+    <td> {{ stud.name }} </td>
+    <td> {{ stud.email }} </td>
+    <td> {{ stud.section }} </td> 
+    <td> <img src = "/media/{{ stud.photo }}" width = "96"> </td>
+    </tr>
+{% endfor %}
+</table>
+<!-- Load pagination system -->
+<div style="font-size:20px;">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">« first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last »</a>
+        {% endif %}
+</div><br />
+
+</body>
+</html>
